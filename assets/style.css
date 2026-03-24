@@ -1,0 +1,138 @@
+/* ================================
+   GENERAL FORM BOX
+   ================================ */
+.form-box {
+    width: 350px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* FORM TITLE */
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* INPUT GROUP CONTAINER */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* ICONS INSIDE INPUT */
+.input-group i {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #555;
+    font-size: 16px;
+}
+
+/* INPUT FIELD STYLING */
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    transition: border 0.3s;
+}
+
+/* FOCUS EFFECT ON INPUT */
+.input-group input:focus {
+    border-color: #28a745;
+}
+
+/* SHOW/HIDE PASSWORD ICON */
+.input-group i.fa-eye,
+.input-group i.fa-eye-slash {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+    color: #555;
+}
+
+/* BUTTON STYLING */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745; /* green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* BUTTON HOVER EFFECT */
+button:hover {
+    background: #218838;
+}
+
+/* SUCCESS MESSAGE BOX */
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* LINK STYLING */
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+p a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+p a:hover {
+    color: #218838;
+}
+
+/* ================================
+   TIMER DISPLAY (EXAM PAGE)
+   ================================ */
+#timer {
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   MEDIA QUERIES (RESPONSIVE)
+   ================================ */
+@media (max-width: 400px) {
+    .form-box {
+        width: 90%;
+        padding: 20px;
+    }
+    .input-group i {
+        top: 10px;
+        font-size: 14px;
+    }
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
