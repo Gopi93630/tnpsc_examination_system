@@ -2,40 +2,58 @@
 session_start();
 include("db.php");
 
-if (!isset($_SESSION['user_id'])) {
-    die("Unauthorized Access");
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../index.html");
+    exit();
 }
 
 $user_id = $_SESSION['user_id'];
-$exam_id = $_POST['exam_id'];
+
+// Get subject from form
+if(!isset($_POST['subject'])){
+    echo "Subject not found!";
+    exit();
+}
+
+$subject = $_POST['subject'];
+
+// OPTIONAL: you can make this dynamic later
+$exam_id = 1;
+
+// Fetch only selected subject questions (10)
+$stmtQ = $conn->prepare("SELECT id, correct_option FROM questions WHERE subject=? LIMIT 10");
+$stmtQ->bind_param("s", $subject);
+$stmtQ->execute();
+$result = $stmtQ->get_result();
 
 $score = 0;
 $total = 0;
 
-// Fetch questions
-$questions = $conn->prepare("SELECT id, correct_option FROM questions WHERE exam_id=?");
-$questions->bind_param("i", $exam_id);
-$questions->execute();
-$result = $questions->get_result();
+while($row = $result->fetch_assoc()){
 
-while ($q = $result->fetch_assoc()) {
+    $qid = $row['id'];
+    $correct = $row['correct_option'];
 
     $total++;
 
-    $qid = $q['id'];
-    $correct = $q['correct_option'];
+    // Check user answer
+    if(isset($_POST["q$qid"])){
 
-    $user_answer = $_POST["q$qid"] ?? 0;
+        $user_answer = $_POST["q$qid"];
 
-    if ($user_answer == $correct) {
-        $score++;
+        if($user_answer == $correct){
+            $score++;
+        }
     }
 }
 
-// Save result
-$stmt = $conn->prepare("INSERT INTO results (user_id, exam_id, score, total) VALUES (?,?,?,?)");
+// Insert result into DB
+$stmt = $conn->prepare("INSERT INTO results (user_id, exam_id, score, total) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("iiii", $user_id, $exam_id, $score, $total);
 $stmt->execute();
+
+$stmt->close();
+$stmtQ->close();
 
 // Redirect to result page
 header("Location: ../user/result.php");

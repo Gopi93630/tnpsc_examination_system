@@ -6,6 +6,9 @@ if(!isset($_SESSION['user_id'])){
     header("Location: ../index.html");
     exit();
 }
+
+// Get subject from URL
+$subject = $_GET['subject'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +33,6 @@ if(!isset($_SESSION['user_id'])){
             color: white;
             text-align: center;
         }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        /* CARDS */
         .card-container {
             display: flex;
             justify-content: center;
@@ -58,8 +55,6 @@ if(!isset($_SESSION['user_id'])){
             background: #28a745;
             color: white;
         }
-
-        /* TIMER */
         #timer-box {
             position: fixed;
             top: 20px;
@@ -67,9 +62,8 @@ if(!isset($_SESSION['user_id'])){
             background: #28a745;
             padding: 10px 20px;
             border-radius: 8px;
+            display: none;
         }
-
-        /* QUESTIONS */
         .question-box {
             background: white;
             color: black;
@@ -80,7 +74,6 @@ if(!isset($_SESSION['user_id'])){
             text-align: left;
         }
 
-        /* SUBMIT BUTTON */
         .submit-btn {
             margin-top: 20px;
             padding: 15px 30px;
@@ -93,9 +86,10 @@ if(!isset($_SESSION['user_id'])){
             transition: 0.3s;
         }
 
+
         .submit-btn:hover {
-            background: #218838;
             transform: scale(1.1);
+            background: #218838;
         }
     </style>
 </head>
@@ -104,43 +98,48 @@ if(!isset($_SESSION['user_id'])){
 
 <div class="overlay">
 
-    <!-- STEP 1: GROUP SELECTION -->
-    <div id="group-section">
-        <h2>Select TNPSC Group</h2>
-        <div class="card-container">
-            <div class="card" onclick="selectGroup('Group 1')">Group 1</div>
-            <div class="card" onclick="selectGroup('Group 2')">Group 2</div>
-            <div class="card" onclick="selectGroup('Group 4')">Group 4</div>
-        </div>
+<?php if(!$subject) { ?>
+
+    <!-- GROUP -->
+    <h2>Select TNPSC Group</h2>
+    <div class="card-container">
+        <div class="card" onclick="showSubjects()">Group 1</div>
+        <div class="card" onclick="showSubjects()">Group 2</div>
     </div>
 
-    <!-- STEP 2: SUBJECT SELECTION -->
+    <!-- SUBJECT -->
     <div id="subject-section" style="display:none;">
         <h2>Select Subject</h2>
         <div class="card-container">
-            <div class="card" onclick="startExam('History')">History</div>
-            <div class="card" onclick="startExam('Polity')">Polity</div>
-            <div class="card" onclick="startExam('Geography')">Geography</div>
-            <div class="card" onclick="startExam('Economy')">Economy</div>
+            <div class="card" onclick="goExam('History')">History</div>
+            <div class="card" onclick="goExam('Polity')">Polity</div>
+            <div class="card" onclick="goExam('Geography')">Geography</div>
+            <div class="card" onclick="goExam('Economy')">Economy</div>
         </div>
     </div>
 
+<?php } else { ?>
+
     <!-- TIMER -->
-    <div id="timer-box" style="display:none;">
+    <div id="timer-box">
         Time Left: <span id="timer">5:00</span>
     </div>
 
-    <!-- STEP 3: QUESTIONS -->
-    <div id="exam-section" style="display:none;">
-        <h2 id="exam-title"></h2>
+    <h2><?php echo $subject; ?> Test</h2>
 
-        <form id="examForm" action="../backend/submit_exam.php" method="POST">
+    <form id="examForm" action="../backend/submit_exam.php" method="POST">
+
+        <!-- ✅ IMPORTANT HIDDEN FIELD -->
+        <input type="hidden" name="subject" value="<?php echo $subject; ?>">
 
         <?php
-        // Fetch 10 random questions
-        $questions = $conn->query("SELECT * FROM questions ORDER BY RAND() LIMIT 10");
+        $stmt = $conn->prepare("SELECT * FROM questions WHERE subject=? LIMIT 10");
+        $stmt->bind_param("s", $subject);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
         $i = 1;
-        while($q = $questions->fetch_assoc()){
+        while($q = $result->fetch_assoc()){
         ?>
 
         <div class="question-box">
@@ -156,24 +155,26 @@ if(!isset($_SESSION['user_id'])){
 
         <button type="submit" class="submit-btn">🚀 Submit Exam</button>
 
-        </form>
-    </div>
+    </form>
+
+<?php } ?>
 
 </div>
+
 <script>
-function selectGroup(group){
-    document.getElementById("group-section").style.display="none";
-    document.getElementById("subject-section").style.display="block";
+function showSubjects(){
+    document.getElementById("subject-section").style.display = "block";
 }
 
-function startExam(subject){
-    document.getElementById("subject-section").style.display="none";
-    document.getElementById("exam-section").style.display="block";
-    document.getElementById("timer-box").style.display="block";
-    document.getElementById("exam-title").innerText = subject + " Test";
-
-    startTimer(5); // 5 minutes
+function goExam(subject){
+    window.location.href = "exam.php?subject=" + subject;
 }
+
+// Start timer if subject selected
+<?php if($subject) { ?>
+document.getElementById("timer-box").style.display = "block";
+startTimer(5);
+<?php } ?>
 </script>
 
 </body>
