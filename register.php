@@ -3,6 +3,7 @@
 <head>
     <title>Register</title>
 
+    <!-- ✅ ADD HERE -->
     <link rel="stylesheet" href="assets/style.css">
 
     <!-- Font Awesome -->
@@ -41,23 +42,26 @@
 
             <!-- NAME -->
             <div class="input-group">
-                <i class="fa fa-user"></i>
-                <input type="text" id="name" name="name" placeholder="Full Name">
+                <i class="fa fa-user left-icon"></i>
+                <input type="text" name="name" placeholder="Full Name">
             </div>
 
             <!-- EMAIL -->
             <div class="input-group">
-                <i class="fa fa-envelope"></i>
-                <input type="email" id="register_email" name="email" placeholder="Enter Email">
+                <i class="fa fa-envelope left-icon"></i>
+                <input type="email" name="email" placeholder="Enter Email">
             </div>
 
             <!-- PASSWORD -->
             <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="password" id="register_password" name="password" placeholder="Create Password">
 
-                <i class="fa fa-eye" id="eye2"
-                   onclick="togglePassword('register_password','eye2')"></i>
+                <i class="fa fa-lock left-icon"></i>
+
+                <input type="password" id="login_password" name="password" placeholder="Enter Password">
+
+                <i class="fa fa-eye right-icon" id="eye1"
+                onclick="togglePassword('login_password','eye1')"></i>
+
             </div>
 
             <!-- BUTTON -->

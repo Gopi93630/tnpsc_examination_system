@@ -1,138 +1,169 @@
-/* ================================
-   GENERAL FORM BOX
-   ================================ */
-.form-box {
-    width: 350px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* 🔥 GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* FORM TITLE */
+/* 🌄 BODY BACKGROUND */
+body {
+    font-family: Arial, sans-serif;
+    background: url('bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+}
+
+/* 🌑 OVERLAY */
+.overlay {
+    background: rgba(0, 0, 0, 0.5); /* adjust darkness */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🧊 GLASS FORM BOX */
+.form-box {
+    width: 350px;
+
+    padding: 30px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+    color: #fff;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* 🎯 TITLE */
 .form-box h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #fff;
 }
 
-/* INPUT GROUP CONTAINER */
+/* 📦 INPUT GROUP */
 .input-group {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
-/* ICONS INSIDE INPUT */
-.input-group i {
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    color: #555;
-    font-size: 16px;
-}
-
-/* INPUT FIELD STYLING */
+/* ✏️ INPUT FIELD */
 .input-group input {
     width: 100%;
-    padding: 10px 10px 10px 35px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    font-size: 15px;
-    transition: border 0.3s;
+    padding: 10px 40px 10px 38px;
+    border-radius: 6px;
+
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 14px;
 }
 
-/* FOCUS EFFECT ON INPUT */
-.input-group input:focus {
-    border-color: #28a745;
+/* 📝 PLACEHOLDER */
+.input-group input::placeholder {
+    color: #ddd;
 }
 
-/* SHOW/HIDE PASSWORD ICON */
-.input-group i.fa-eye,
-.input-group i.fa-eye-slash {
+/* 🔹 LEFT ICON */
+.left-icon {
     position: absolute;
-    right: 10px;
-    top: 12px;
-    cursor: pointer;
-    color: #555;
+ 
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
 }
 
-/* BUTTON STYLING */
+/* 👁️ RIGHT ICON */
+.right-icon {
+    position: absolute;
+ 
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+}
+
+/* 🔘 BUTTON */
 button {
     width: 100%;
     padding: 12px;
-    background: #28a745; /* green */
+    background: linear-gradient(45deg, #28a745, #218838);
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: 6px;
+    color: #fff;
     font-size: 16px;
-    font-weight: bold;
+ 
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
 }
 
-/* BUTTON HOVER EFFECT */
+
 button:hover {
-    background: #218838;
+    transform: scale(1.05);
 }
 
-/* SUCCESS MESSAGE BOX */
+/* 🔗 LINKS */
+a {
+    color: #00ffcc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ✅ SUCCESS MESSAGE */
 .success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: rgba(40, 167, 69, 0.8);
+    color: #fff;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
-    font-weight: bold;
 }
 
-/* LINK STYLING */
-p {
+/* ❌ ERROR MESSAGE */
+.error {
+    background-color: rgba(255, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #555;
 }
 
-p a {
-    color: #28a745;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+/* ✨ ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-p a:hover {
-    color: #218838;
+/* 🌙 DARK MODE */
+.dark-mode {
+    background: #121212 !important;
 }
 
-/* ================================
-   TIMER DISPLAY (EXAM PAGE)
-   ================================ */
-#timer {
-    font-weight: bold;
-    font-size: 20px;
-    color: red;
-    text-align: center;
-    margin-bottom: 15px;
+.dark-mode .form-box {
+    background: rgba(0,0,0,0.6);
+    color: #fff;
 }
 
-/* ================================
-   MEDIA QUERIES (RESPONSIVE)
-   ================================ */
+/* 📱 RESPONSIVE */
 @media (max-width: 400px) {
     .form-box {
         width: 90%;
-        padding: 20px;
-    }
-    .input-group i {
-        top: 10px;
-        font-size: 14px;
-    }
-    button {
-        font-size: 14px;
-        padding: 10px;
     }
 }

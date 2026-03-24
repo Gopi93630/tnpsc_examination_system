@@ -3,7 +3,9 @@
 <head>
     <title>Login</title>
 
+    <!-- ✅ ADD HERE -->
     <link rel="stylesheet" href="assets/style.css">
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,17 +43,20 @@
 
             <!-- EMAIL -->
             <div class="input-group">
-                <i class="fa fa-envelope"></i>
-                <input type="email" id="login_email" name="email" placeholder="Enter Email">
+                <i class="fa fa-envelope left-icon"></i>
+                <input type="email" name="email" placeholder="Enter Email">
             </div>
 
             <!-- PASSWORD -->
             <div class="input-group">
-                <i class="fa fa-lock"></i>
+
+                <i class="fa fa-lock left-icon"></i>
+
                 <input type="password" id="login_password" name="password" placeholder="Enter Password">
 
-                <i class="fa fa-eye" id="eye1"
-                   onclick="togglePassword('login_password','eye1')"></i>
+                <i class="fa fa-eye right-icon" id="eye1"
+                onclick="togglePassword('login_password','eye1')"></i>
+
             </div>
 
             <!-- BUTTON -->
