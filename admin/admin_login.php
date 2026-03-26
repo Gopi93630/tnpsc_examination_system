@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Login</title>
+    <title>Admin</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/style.css">
@@ -20,13 +20,13 @@
     <!-- 🧊 FORM BOX -->
     <div class="form-box">
 
-        <h2>Admin Login</h2>
+        <h2>Admin</h2>
 
         <!-- SUCCESS MESSAGE -->
         <div id="success-msg" class="success" style="display:none;"></div>
 
         <!-- FORM -->
-        <form action="../backend/login.php" method="POST" onsubmit="return validateLogin()">
+        <form action="../backend/admin_login.php" method="POST" onsubmit="return validateLogin()">
 
             <!-- EMAIL -->
             <div class="input-group">

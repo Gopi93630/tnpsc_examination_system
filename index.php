@@ -66,14 +66,14 @@
         <!-- USER -->
         <a href="login.php">
             <button class="role-btn user-btn">
-                <i class="fa fa-user icon"></i> User Login
+                <i class="fa fa-user icon"></i> User
             </button>
         </a>
 
         <!-- ADMIN -->
         <a href="admin/admin_login.php">
             <button class="role-btn admin-btn">
-                <i class="fa fa-user-shield icon"></i> Admin Login
+                <i class="fa fa-user-shield icon"></i> Admin
             </button>
         </a>
 
