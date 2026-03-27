@@ -40,7 +40,7 @@ $page = basename($_SERVER['PHP_SELF']);
 body {
     margin:0;
     font-family:'Poppins',sans-serif;
-    background:url('../assets/bg.jpg') no-repeat center/cover fixed;
+    background:url('../assets/bg1.jpg') no-repeat center/cover fixed;
 }
 
 /* OVERLAY */
