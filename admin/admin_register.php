@@ -27,7 +27,7 @@ $error = $_GET['error'] ?? '';
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: url('../assets/bg.jpg') no-repeat center center fixed;
+            background: url('../assets/bg1.png') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
             color: #fff;
